@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour {
     //fixed update for the phisycs calc
     void FixedUpdate()
     {
+        //adding gravity of my own to the rigit body as the Gravity wasnt strong enough
+        Player.AddForce(new Vector3(0, -100, 0),ForceMode.Force);
         Transform t = Player.transform;
 
         if (moveRight)

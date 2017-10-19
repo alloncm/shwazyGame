@@ -5,10 +5,11 @@ using UnityEngine;
 public class RespawnObjects : MonoBehaviour {
 
     public GameObject cube;
-    private float timer;
+    private float timer = 0;
     public float destTime = 3.0f;
-	// Use this for initialization
-	void Start () {
+    float decTime = 0.1f;
+    // Use this for initialization
+    void Start () {
         float r = Random.Range(-10, 10);
         Instantiate(cube, new Vector3(r, 1, 15), Quaternion.identity);
     }
@@ -18,6 +19,7 @@ public class RespawnObjects : MonoBehaviour {
         timer += Time.deltaTime;
         if (timer > destTime)
         {
+            DecreaseTimer();
             int scale = Random.Range(1, 5);
             int numobs = 2;
             if(scale<3)
@@ -32,6 +34,13 @@ public class RespawnObjects : MonoBehaviour {
                 Instantiate(cube, new Vector3(r, 1, 15), Quaternion.identity);
             }
             timer = 0;
+        }
+    }
+    void DecreaseTimer()
+    {
+        if((destTime-decTime)>0)
+        {
+            destTime -= decTime;
         }
     }
 }

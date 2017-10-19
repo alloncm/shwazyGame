@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveObjects : MonoBehaviour {
+public class MoveObjects : MonoBehaviour
+{
+    
+    Vector3 speed = new Vector3(0, 0, -15);
 
-
-    public Vector3 speed = new Vector3(0, 0, 10);
+    public Vector3 localSpeed;
 	// Use this for initialization
 	void Start ()
     {
@@ -13,16 +15,18 @@ public class MoveObjects : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if(transform.position.y<0)
         {
             Destroy(gameObject);
         }
-		
+        GameObject gm = GameObject.FindWithTag("GameController");
+        localSpeed = gm.GetComponent<GameManager>().GetObsSpeed();
 	}
     void FixedUpdate()
     {
         //GetComponent<Rigidbody>().MovePosition(transform.position + speed*Time.deltaTime);
-        GetComponent<Rigidbody>().AddForce(speed*Time.deltaTime,ForceMode.VelocityChange);
+        GetComponent<Rigidbody>().AddForce(localSpeed*Time.deltaTime,ForceMode.VelocityChange);
     }
 }
