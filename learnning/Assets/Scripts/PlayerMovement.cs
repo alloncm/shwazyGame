@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
+    public GameObject canvas;
 
+    bool gameover;
     Rigidbody Player;
 
     bool moveRight = false;
     bool moveLeft = false;
 
-    public Vector3 move = new Vector3(15, 0, 0);
+    Vector3 move = new Vector3(15, 0, 0);
 
     // Use this for initialization
     void Start ()
     {
         Player = GetComponent<Rigidbody>();
+        gameover = false;
 	}
 	
 	// Update is called once per frame
@@ -32,7 +36,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if(transform.position.y<0)
         {
-            Restart();
+            Restart(3);
         }
 	}
 
@@ -60,8 +64,16 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (collision.collider.tag == "Obstacle")
         {
-            Restart();
+            Restart(3);
         }
+    }
+
+
+    void Restart(int a)
+    {
+        canvas.SetActive(true);
+        gameover = true;
+        Invoke("Restart", a);
     }
 
     void Restart()
@@ -69,4 +81,8 @@ public class PlayerMovement : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public bool IsGameOver()
+    {
+        return gameover;
+    }
 }
