@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     float ScoreTime = 0.0f;
 
-    int counter = 0;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -49,47 +49,12 @@ public class GameManager : MonoBehaviour
         SaveCurrentScore(ScoreTime);
         text = GetComponent<GUIText>();
         text.text = ((ScoreTime)).ToString("0.0");
-        bool isOver = false;
-        if(counter==0)
-        {
-            GameObject gm = GameObject.FindWithTag("Player");
-            isOver = gm.GetComponent<PlayerMovement>().IsGameOver();
-        }
-
-        //managed to save high score
-        if (isOver)
-        {
-            
-            double score = ScoreTime;
-            
-            double high = 0;
-            using (var reader = new BinaryReader(File.OpenRead("FileName")))
-            {
-                high = reader.ReadDouble();
-               
-            }
-            using (var writer = new BinaryWriter(File.OpenWrite("FileName")))
-            {
-                if(score>high)
-                {
-                    writer.Write(score);
-                    
-                }
-                writer.Close();
-                
-            }
-            isOver = false;
-            counter++;
-        }
-        
     }
     void SaveCurrentScore(double score)
     {
-        using (var writer = new BinaryWriter(File.OpenWrite("CurScore.bin")))
-        {
-            writer.Write(score.ToString("0.0"));
-            Debug.Log(score.ToString("0.0"));
-            writer.Close();
-        }
+        StreamWriter wr = new StreamWriter(@"Assets\TextFiles\score.txt");
+        wr.WriteLine(score.ToString("0.0"));
+        wr.Close();
+        wr.Dispose();
     }
 }

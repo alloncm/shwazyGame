@@ -25,6 +25,19 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+#if UNITY_ANDROID
+        foreach(Touch t in Input.touches)
+        {
+            if (t.position.x > (Screen.width / 2))
+            {
+                moveRight = true;
+            }
+            if (t.position.x < (Screen.width / 2))
+            {
+                moveLeft = true;
+            }
+        }
+#else
         if (Input.GetKey("left"))
         {
             moveLeft = true;
@@ -33,8 +46,8 @@ public class PlayerMovement : MonoBehaviour
         {
             moveRight = true;
         }
-
-        if(transform.position.y<0)
+#endif
+        if (transform.position.y<0)
         {
              SceneManager.LoadScene(2);
         }
