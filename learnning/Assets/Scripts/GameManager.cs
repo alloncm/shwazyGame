@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log(obsSpeed);
+        
         if (timer > timeIncSpeed)
         {
             timer = 0;
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateGui()
     {
-        
+        SaveCurrentScore(ScoreTime);
         text = GetComponent<GUIText>();
         text.text = ((ScoreTime)).ToString("0.0");
         bool isOver = false;
@@ -59,25 +59,37 @@ public class GameManager : MonoBehaviour
         //managed to save high score
         if (isOver)
         {
+            
             double score = ScoreTime;
+            
             double high = 0;
             using (var reader = new BinaryReader(File.OpenRead("FileName")))
             {
                 high = reader.ReadDouble();
-                Debug.Log(high+" "+score);
+               
             }
             using (var writer = new BinaryWriter(File.OpenWrite("FileName")))
             {
                 if(score>high)
                 {
                     writer.Write(score);
-                    Debug.Log("new high score");
+                    
                 }
                 writer.Close();
+                
             }
             isOver = false;
             counter++;
         }
         
+    }
+    void SaveCurrentScore(double score)
+    {
+        using (var writer = new BinaryWriter(File.OpenWrite("CurScore.bin")))
+        {
+            writer.Write(score.ToString("0.0"));
+            Debug.Log(score.ToString("0.0"));
+            writer.Close();
+        }
     }
 }

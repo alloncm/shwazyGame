@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(transform.position.y<0)
         {
-            Restart(3);
+             SceneManager.LoadScene(2);
         }
 	}
 
@@ -64,25 +64,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.collider.tag == "Obstacle")
         {
-            Restart(3);
+            SceneManager.LoadScene(2);
         }
     }
 
 
-    void Restart(int a)
-    {
-        canvas.SetActive(true);
-        gameover = true;
-        Invoke("Restart", a);
-    }
-
-    void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
+        
     public bool IsGameOver()
     {
         return gameover;
     }
+  
 }
