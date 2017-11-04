@@ -26,7 +26,6 @@ public class MoveObjects : MonoBehaviour
 	}
     void FixedUpdate()
     {
-        //GetComponent<Rigidbody>().MovePosition(transform.position + speed*Time.deltaTime);
         GetComponent<Rigidbody>().AddForce(localSpeed*Time.deltaTime,ForceMode.VelocityChange);
     }
 }

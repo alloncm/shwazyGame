@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        //managing platforms
 #if UNITY_ANDROID
         foreach(Touch t in Input.touches)
         {
@@ -63,13 +64,13 @@ public class PlayerMovement : MonoBehaviour
         if (moveRight)
         {
             Player.MovePosition((t.position+move*Time.deltaTime));
-            //Player.AddForce(move * Time.deltaTime, ForceMode.VelocityChange);
+            
             moveRight = false;
         }
         if(moveLeft)
         {
            Player.MovePosition((t.position-move*Time.deltaTime));
-           //Player.AddForce(-move * Time.deltaTime, ForceMode.VelocityChange);
+           
             moveLeft = false;   
         }
     }

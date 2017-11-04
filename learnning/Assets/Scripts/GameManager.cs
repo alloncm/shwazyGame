@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     public Vector3 obsSpeed;
 
-    GUIText text;
+    public Text text;
 
     float ScoreTime = 0.0f;
 
@@ -46,9 +47,8 @@ public class GameManager : MonoBehaviour
 
     public void UpdateGui()
     {
-        SaveCurrentScore(ScoreTime);
-        text = GetComponent<GUIText>();
-        text.text = ((ScoreTime)).ToString("0.0");
+        //SaveCurrentScore(ScoreTime);
+        //text.text = ((ScoreTime)).ToString("0.0");
     }
     void SaveCurrentScore(double score)
     {

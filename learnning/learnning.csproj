@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\MoveObjects.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\RespawnObjects.cs" />
+    <Compile Include="Assets\Scripts\UpdateScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextFiles\high.txt" />
