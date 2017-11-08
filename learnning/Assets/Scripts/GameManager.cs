@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
 
     public Vector3 obsSpeed;
 
-    GUIText text;
-
     float ScoreTime = 0.0f;
 
 
@@ -37,19 +35,13 @@ public class GameManager : MonoBehaviour
             timer += Time.deltaTime;
         }
         ScoreTime += Time.deltaTime;
-        UpdateGui();
     }
     public Vector3 GetObsSpeed()
     {
         return obsSpeed;    
     }
 
-    public void UpdateGui()
-    {
-        SaveCurrentScore(ScoreTime);
-        text = GetComponent<GUIText>();
-        text.text = ((ScoreTime)).ToString("0.0");
-    }
+   
     void SaveCurrentScore(double score)
     {
         StreamWriter wr = new StreamWriter(@"Assets\TextFiles\score.txt");
